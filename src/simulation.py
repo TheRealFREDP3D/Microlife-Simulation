@@ -46,7 +46,7 @@ class Simulation:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p:
                 self.paused = not self.paused
-                self._log_event("CONTROL", f"Simulation {"paused" if self.paused else "resumed"}")
+                self._log_event("CONTROL", f"Simulation {'paused' if self.paused else 'resumed'}")
             elif event.key == pygame.K_UP:
                 self.simulation_speed = min(4.0, self.simulation_speed + 0.5)
                 self._log_event("CONTROL", f"Simulation speed increased to {self.simulation_speed:.1f}x")
@@ -55,6 +55,16 @@ class Simulation:
                 self._log_event("CONTROL", f"Simulation speed decreased to {self.simulation_speed:.1f}x")
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos
+            if mouse_y >= SCREEN_HEIGHT:  # Click in UI panel
+                reset_button_width = 80
+                reset_button_height = 30
+                reset_button_x = SCREEN_WIDTH - reset_button_width - 10
+                reset_button_y = SCREEN_HEIGHT + UI_PANEL_HEIGHT - reset_button_height - 10
+                if reset_button_x <= mouse_x <= reset_button_x + reset_button_width and \
+                   reset_button_y <= mouse_y <= reset_button_y + reset_button_height:
+                    self.reset()
+                    self._log_event("USER_ACTION", "Simulation reset")
+                    return
             if mouse_y < SCREEN_HEIGHT: # Click in simulation area
                 if event.button == 1: # Left click to spawn cell or select
                     if self.paused: # Only select cell when paused
@@ -141,6 +151,35 @@ class Simulation:
 
             clan_text = self.font.render(f"Clan {clan.id} ({clan_count}): Spd:{clan_avg_speed:.1f} Sen:{clan_avg_sense:.1f} Eff:{clan_avg_efficiency:.1f} Size:{clan_avg_size:.1f} Life:{clan_avg_lifespan:.0f}", True, clan.color)
             self.screen.blit(clan_text, (SCREEN_WIDTH // 2, clan_info_y_start + i * 20))
+
+        # Draw reset button
+        reset_button_width = 80
+        reset_button_height = 30
+        reset_button_x = SCREEN_WIDTH - reset_button_width - 10
+        reset_button_y = SCREEN_HEIGHT + UI_PANEL_HEIGHT - reset_button_height - 10
+        pygame.draw.rect(self.screen, (100, 100, 100), (reset_button_x, reset_button_y, reset_button_width, reset_button_height))
+        reset_text = self.font.render("Reset", True, TEXT_COLOR)
+        self.screen.blit(reset_text, (reset_button_x + (reset_button_width - reset_text.get_width()) // 2, reset_button_y + (reset_button_height - reset_text.get_height()) // 2))
+
+    def reset(self):
+        """Reset the simulation to initial state."""
+        self.environment = Environment()
+        self.paused = False
+        self.simulation_speed = 1.0
+        self.selected_cell = None
+        self.simulation_time = 0
+        self.stats_history = {
+            "time": [],
+            "cell_count": [],
+            "food_count": [],
+            "avg_speed": [],
+            "avg_sense_radius": [],
+            "avg_energy_efficiency": []
+        }
+        # Close old log file and create new one
+        self.log_file.close()
+        self.log_file = self._setup_log_file()
+        self._log_event("SYSTEM", "Simulation reset")
 
     def run(self):
         running = True

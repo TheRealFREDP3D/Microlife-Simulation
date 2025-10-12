@@ -217,5 +217,3 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 asset_list.md
-project_status_analysis.md
-/NEXT_STEPS.md

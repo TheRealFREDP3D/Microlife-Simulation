@@ -1,0 +1,2 @@
+[18:20:30] [SYSTEM] Simulation reset
+[18:20:30] [USER_ACTION] Simulation reset

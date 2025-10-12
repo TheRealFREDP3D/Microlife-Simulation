@@ -1,17 +1,25 @@
 
-import pygame
-import random
 import math
 import os
+import random
+
+import pygame
+
+from clan import Clan  # Import the Clan class
 from constants import (
-    SCREEN_WIDTH, SCREEN_HEIGHT, CELL_SIZE_MIN, CELL_SIZE_MAX, CELL_COLOR, CELL_ENERGY_MAX,
-    CELL_ENERGY_CONSUMPTION_PER_MOVE_BASE, CELL_IDLE_ENERGY_DRAIN, CELL_REPRODUCTION_THRESHOLD,
-    CELL_MIN_AGE_TO_REPRODUCE, CELL_MAX_LIFESPAN, CELL_MUTATION_RATE, CELL_MUTATION_AMOUNT,
-    CELL_SPEED_MIN, CELL_SPEED_MAX, CELL_SENSE_RADIUS_MIN, CELL_SENSE_RADIUS_MAX,
-    CELL_ENERGY_EFFICIENCY_MIN, CELL_ENERGY_EFFICIENCY_MAX, INITIAL_REPRODUCTION_TIME
+    CELL_ENERGY_CONSUMPTION_PER_MOVE_BASE,
+    CELL_ENERGY_MAX,
+    CELL_IDLE_ENERGY_DRAIN,
+    CELL_MIN_AGE_TO_REPRODUCE,
+    CELL_MUTATION_AMOUNT,
+    CELL_MUTATION_RATE,
+    CELL_REPRODUCTION_THRESHOLD,
+    CELL_SIZE_MIN,
+    INITIAL_REPRODUCTION_TIME,
+    SCREEN_HEIGHT,
+    SCREEN_WIDTH,
 )
 from utils import clamp, get_distance
-from clan import Clan # Import the Clan class
 
 # Load cell image once
 CELL_IMAGE_PATH = os.path.join("assets", "cell_basic.png")
@@ -52,7 +60,7 @@ class Cell:
                 direction_x = dx / dist
                 direction_y = dy / dist
 
-                move_amount = min(self.speed, dist) # Don\"t overshoot
+                move_amount = min(self.speed, dist) # Don't overshoot
                 self.x += direction_x * move_amount
                 self.y += direction_y * move_amount
 
@@ -77,7 +85,7 @@ class Cell:
 
     def find_food(self, food_items):
         closest_food = None
-        min_dist = float(\"inf\") # Initialize with a very large distance
+        min_dist = float('inf')  # Initialize with a very large distance
 
         for food in food_items:
             dist = get_distance((self.x, self.y), (food.x, food.y))
@@ -95,22 +103,25 @@ class Cell:
             return True
         return False
 
-    def reproduce(self, mate=None):
-        # Check for initial reproduction trigger
+    def reproduce(self):
+        """
+        Asexual reproduction: cell splits into two when conditions are met.
+        Offspring inherits parent's clan with potential mutations applied at the clan level.
+        """
+        # Check for initial reproduction timer
         if self.reproduction_timer < INITIAL_REPRODUCTION_TIME:
             self.reproduction_timer += 1
             return None
 
+        # Check if cell has enough energy and age to reproduce
         if self.energy >= CELL_REPRODUCTION_THRESHOLD and self.age >= CELL_MIN_AGE_TO_REPRODUCE:
-            if mate and mate.clan.id != self.clan.id: # Only mate with same clan
-                return None
-
             self.energy /= 2 # Split energy with offspring
+            
             # Create offspring near parent
             offspring_x = clamp(self.x + random.uniform(-self.size, self.size), 0, SCREEN_WIDTH - self.size)
             offspring_y = clamp(self.y + random.uniform(-self.size, self.size), 0, SCREEN_HEIGHT - self.size)
 
-            # Mutate traits for offspring - now applied to the clan
+            # Apply mutations to clan traits
             if random.random() < CELL_MUTATION_RATE:
                 self.clan.apply_mutation("speed", random.uniform(-CELL_MUTATION_AMOUNT, CELL_MUTATION_AMOUNT))
             if random.random() < CELL_MUTATION_RATE:
@@ -156,5 +167,3 @@ class Cell:
         if self.energy <= 0 or self.age >= self.lifespan:
             return False # Indicate death
         return True # Indicate alive
-
-

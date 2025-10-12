@@ -1,0 +1,3 @@
+[18:19:51] [SYSTEM] Simulation reset
+[18:19:51] [USER_ACTION] Simulation reset
+[18:19:54] [SYSTEM] Simulation quit by user

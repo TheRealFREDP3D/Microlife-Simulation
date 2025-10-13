@@ -1,11 +1,20 @@
 
-import pygame
 import datetime
 import os
+
+import pygame
+
+from constants import (
+    FONT_SIZE,
+    FPS,
+    SCREEN_HEIGHT,
+    SCREEN_WIDTH,
+    TEXT_COLOR,
+    UI_PANEL_HEIGHT,
+)
 from environment import Environment
-from cell import Cell
 from food import spawn_food_item
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, FONT_SIZE, TEXT_COLOR, UI_PANEL_HEIGHT
+
 
 class Simulation:
     def __init__(self):
@@ -204,5 +213,3 @@ class Simulation:
 
         self.log_file.close()
         pygame.quit()
-
-

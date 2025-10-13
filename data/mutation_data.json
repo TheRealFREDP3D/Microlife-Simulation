@@ -1,0 +1,368 @@
+{
+  "physical": [
+    {
+      "name": "Flagella Surge",
+      "description": "Enhanced tail-like structures improve propulsion.",
+      "stat_changes": { "speed": 2, "energy_efficiency": -1 },
+      "special_effects": []
+    },
+    {
+      "name": "Dense Membrane",
+      "description": "Thicker outer layer increases defense.",
+      "stat_changes": { "defense": 2, "speed": -1 },
+      "special_effects": []
+    },
+    {
+      "name": "Elastic Cytoplasm",
+      "description": "Flexible body structure improves mobility.",
+      "stat_changes": { "speed": 1 },
+      "special_effects": []
+    },
+    {
+      "name": "Calcium Shell",
+      "description": "Rigid shell boosts defense at a cost.",
+      "stat_changes": { "defense": 3, "speed": -2 },
+      "special_effects": []
+    },
+    {
+      "name": "Spiked Surface",
+      "description": "Small barbs provide passive attack.",
+      "stat_changes": { "attack": 1, "defense": 1 },
+      "special_effects": []
+    },
+    {
+      "name": "Compact Core",
+      "description": "Reduces size to minimize energy use.",
+      "stat_changes": { "size": -1, "energy_efficiency": 1 },
+      "special_effects": []
+    },
+    {
+      "name": "Gigantism",
+      "description": "Larger body increases mass and energy needs.",
+      "stat_changes": { "size": 2, "speed": -1 },
+      "special_effects": []
+    },
+    {
+      "name": "Dual Flagella",
+      "description": "Two propulsion limbs boost speed.",
+      "stat_changes": { "speed": 3, "energy_efficiency": -1 },
+      "special_effects": []
+    },
+    {
+      "name": "Reinforced Wall",
+      "description": "Extra membrane layer improves durability.",
+      "stat_changes": { "defense": 2, "lifespan": 1 },
+      "special_effects": []
+    },
+    {
+      "name": "Venom Glands",
+      "description": "Produces mild toxins on contact.",
+      "stat_changes": { "attack": 2 },
+      "special_effects": ["poison_enemy_on_contact"]
+    },
+    {
+      "name": "Rapid Repair",
+      "description": "Increased self-healing improves survival.",
+      "stat_changes": { "lifespan": 2, "energy_efficiency": -1 },
+      "special_effects": []
+    },
+    {
+      "name": "Streamlined Shape",
+      "description": "Aerodynamic body increases movement speed.",
+      "stat_changes": { "speed": 2 },
+      "special_effects": []
+    },
+    {
+      "name": "Hardened Spikes",
+      "description": "Sharper spikes increase attack.",
+      "stat_changes": { "attack": 2, "defense": 1 },
+      "special_effects": []
+    },
+    {
+      "name": "Energy Reservoir",
+      "description": "Stores extra nutrients for emergencies.",
+      "stat_changes": { "lifespan": 1, "energy_efficiency": 1 },
+      "special_effects": []
+    },
+    {
+      "name": "Muscular Flagellum",
+      "description": "Powerful limb improves movement bursts.",
+      "stat_changes": { "speed": 2, "size": 1 },
+      "special_effects": []
+    },
+    {
+      "name": "Transparent Body",
+      "description": "Harder to detect visually.",
+      "stat_changes": { "defense": 1 },
+      "special_effects": ["hard_to_target"]
+    },
+    {
+      "name": "Thickened Cytosol",
+      "description": "Physical resistance is increased.",
+      "stat_changes": { "defense": 2 },
+      "special_effects": []
+    },
+    {
+      "name": "Razor Cilia",
+      "description": "Sharp, hairlike structures increase attack.",
+      "stat_changes": { "attack": 2, "energy_efficiency": -1 },
+      "special_effects": []
+    },
+    {
+      "name": "Metabolic Boost",
+      "description": "Higher base activity boosts speed.",
+      "stat_changes": { "speed": 1, "energy_efficiency": -1 },
+      "special_effects": []
+    },
+    {
+      "name": "Extended Lifespan",
+      "description": "Cell survives longer before death.",
+      "stat_changes": { "lifespan": 2 },
+      "special_effects": []
+    }
+  ],
+  "social": [
+    {
+      "name": "Signal Pulses",
+      "description": "Emits basic chemical signals to others.",
+      "stat_changes": { "vision_range": 1 },
+      "special_effects": ["pheromone_beacon"]
+    },
+    {
+      "name": "Resource Sharing",
+      "description": "Transfers energy to nearby allies.",
+      "stat_changes": { "energy_efficiency": -1 },
+      "special_effects": ["share_energy"]
+    },
+    {
+      "name": "Mimic Colors",
+      "description": "Blends with nearby organisms to avoid threats.",
+      "stat_changes": { "defense": 1 },
+      "special_effects": ["group_camouflage"]
+    },
+    {
+      "name": "Cluster Instinct",
+      "description": "Increases defense when surrounded.",
+      "stat_changes": { "defense": 2 },
+      "special_effects": ["pack_defense_bonus"]
+    },
+    {
+      "name": "Cooperative Division",
+      "description": "Cells divide in sync for survival advantages.",
+      "stat_changes": { "reproduction_rate": 1, "lifespan": -1 },
+      "special_effects": []
+    },
+    {
+      "name": "Swarm Drift",
+      "description": "Group movement reduces energy drain.",
+      "stat_changes": { "energy_efficiency": 1 },
+      "special_effects": ["group_speed_bonus"]
+    },
+    {
+      "name": "Herd Shielding",
+      "description": "Front cells protect those behind.",
+      "stat_changes": { "defense": 1 },
+      "special_effects": ["frontline_blocking"]
+    },
+    {
+      "name": "Collective Scent",
+      "description": "Shared chemical trails guide members.",
+      "stat_changes": { "vision_range": 1 },
+      "special_effects": ["pheromone_trail"]
+    },
+    {
+      "name": "Brood Burst",
+      "description": "Mass reproduction when density is high.",
+      "stat_changes": { "reproduction_rate": 2, "energy_efficiency": -1 },
+      "special_effects": []
+    },
+    {
+      "name": "Mutual Camouflage",
+      "description": "Group blending reduces visibility.",
+      "stat_changes": { "defense": 1 },
+      "special_effects": ["stealth_huddle"]
+    },
+    {
+      "name": "Defensive Circle",
+      "description": "Organisms form protective rings.",
+      "stat_changes": { "defense": 2, "speed": -1 },
+      "special_effects": []
+    },
+    {
+      "name": "Signal Flares",
+      "description": "Alerts others of danger.",
+      "stat_changes": { "vision_range": 2 },
+      "special_effects": ["threat_signal"]
+    },
+    {
+      "name": "Coordinated Strike",
+      "description": "Multiple organisms attack together.",
+      "stat_changes": { "attack": 2 },
+      "special_effects": ["pack_attack"]
+    },
+    {
+      "name": "Shared Healing",
+      "description": "Organisms provide regeneration boosts.",
+      "stat_changes": { "lifespan": 1, "energy_efficiency": -1 },
+      "special_effects": ["heal_others"]
+    },
+    {
+      "name": "Follower Instinct",
+      "description": "Aligns with stronger nearby organisms.",
+      "stat_changes": { "speed": 1 },
+      "special_effects": ["leader_tracking"]
+    },
+    {
+      "name": "Nest Building",
+      "description": "Cells remain close to reproduction hubs.",
+      "stat_changes": { "reproduction_rate": 1, "speed": -1 },
+      "special_effects": []
+    },
+    {
+      "name": "Mass Distraction",
+      "description": "Confuses predators when in groups.",
+      "stat_changes": { "defense": 1 },
+      "special_effects": ["distract_predators"]
+    },
+    {
+      "name": "Pheromone Alarm",
+      "description": "Triggers evasive responses in others.",
+      "stat_changes": {},
+      "special_effects": ["panic_signal"]
+    },
+    {
+      "name": "Resource Hoarding",
+      "description": "Keeps more nutrients during competition.",
+      "stat_changes": { "lifespan": 1, "energy_efficiency": 1 },
+      "special_effects": []
+    },
+    {
+      "name": "Mating Beacon",
+      "description": "Increases reproduction attraction range.",
+      "stat_changes": { "reproduction_rate": 2, "energy_efficiency": -1 },
+      "special_effects": ["mate_signal"]
+    }
+  ],
+  "brain": [
+    {
+      "name": "Basic Photosensors",
+      "description": "Detects light sources and movement.",
+      "stat_changes": { "vision_range": 2 },
+      "special_effects": []
+    },
+    {
+      "name": "Primitive Navigation",
+      "description": "Improves ability to avoid obstacles.",
+      "stat_changes": { "speed": 1 },
+      "special_effects": ["pathfinding"]
+    },
+    {
+      "name": "Food Targeting",
+      "description": "Instinctively moves toward nutrients.",
+      "stat_changes": { "vision_range": 1 },
+      "special_effects": ["food_tracking"]
+    },
+    {
+      "name": "Threat Recognition",
+      "description": "Detects and avoids larger attackers.",
+      "stat_changes": { "vision_range": 2, "speed": 1 },
+      "special_effects": ["danger_avoidance"]
+    },
+    {
+      "name": "Echo Response",
+      "description": "Reacts to vibrations in fluid.",
+      "stat_changes": { "vision_range": 1 },
+      "special_effects": ["vibration_sense"]
+    },
+    {
+      "name": "Pattern Seeking",
+      "description": "Learns repeated locations of food.",
+      "stat_changes": { "lifespan": 1 },
+      "special_effects": ["memory_patterns"]
+    },
+    {
+      "name": "Aggression Trigger",
+      "description": "Attacks when resources are scarce.",
+      "stat_changes": { "attack": 2, "energy_efficiency": -1 },
+      "special_effects": ["attack_mode"]
+    },
+    {
+      "name": "Retreat Instinct",
+      "description": "Flees when health is low.",
+      "stat_changes": { "speed": 1 },
+      "special_effects": ["auto_escape"]
+    },
+    {
+      "name": "Curiosity Drift",
+      "description": "Moves unpredictably to explore new zones.",
+      "stat_changes": {},
+      "special_effects": ["random_wander"]
+    },
+    {
+      "name": "Focus Lock",
+      "description": "Locks onto a single target until resolved.",
+      "stat_changes": { "attack": 1 },
+      "special_effects": ["target_persistence"]
+    },
+    {
+      "name": "Memory Echo",
+      "description": "Remembers past predator encounters.",
+      "stat_changes": { "lifespan": 1 },
+      "special_effects": ["predator_memory"]
+    },
+    {
+      "name": "Avoidance Learning",
+      "description": "Learns to dodge attacks more effectively.",
+      "stat_changes": { "speed": 1, "defense": 1 },
+      "special_effects": []
+    },
+    {
+      "name": "Reproductive Timing",
+      "description": "Breeds only during optimal conditions.",
+      "stat_changes": { "reproduction_rate": 1, "lifespan": 1 },
+      "special_effects": []
+    },
+    {
+      "name": "Sensory Expansion",
+      "description": "Enhances detection in all directions.",
+      "stat_changes": { "vision_range": 3 },
+      "special_effects": []
+    },
+    {
+      "name": "Pack Awareness",
+      "description": "Tracks motions of nearby organisms.",
+      "stat_changes": { "vision_range": 1 },
+      "special_effects": ["swarm_perception"]
+    },
+    {
+      "name": "Energy Prioritization",
+      "description": "Shifts behavior when energy is low.",
+      "stat_changes": { "energy_efficiency": 1 },
+      "special_effects": ["survival_mode"]
+    },
+    {
+      "name": "Target Prioritization",
+      "description": "Chooses weaker prey first.",
+      "stat_changes": { "attack": 1 },
+      "special_effects": ["prey_filtering"]
+    },
+    {
+      "name": "Stimulus Tracking",
+      "description": "Identifies and follows movement trails.",
+      "stat_changes": {},
+      "special_effects": ["trail_tracking"]
+    },
+    {
+      "name": "Strategic Retreat",
+      "description": "Retreats to heal or regenerate.",
+      "stat_changes": { "lifespan": 1 },
+      "special_effects": ["heal_retreat"]
+    },
+    {
+      "name": "Hunting Instinct",
+      "description": "Detects weak targets more efficiently.",
+      "stat_changes": { "attack": 2, "vision_range": 1 },
+      "special_effects": ["predation_focus"]
+    }
+  ]
+}

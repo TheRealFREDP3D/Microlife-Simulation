@@ -3,55 +3,57 @@
 ```mermaid
 graph TD
 
-    user["User<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/main.py"]
-    subgraph microlife_simulation_boundary["Microlife Simulation<br>[External]"]
-        subgraph main_app_boundary["Main Application<br>[External]"]
-            main_loop["Main Loop<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/main.py"]
-            renderer["Renderer<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/main.py"]
+    node-1760394401224["New Node<br>[External]"]
+
+```
+# Unnamed CodeViz Diagram
+
+```mermaid
+graph TD
+
+    User["Simulator User<br>/README.md"]
+    Pygame["Pygame Library<br>/requirements.txt"]
+    Python["Python 3.x Runtime<br>/requirements.txt"]
+    OperatingSystem["Operating System<br>[External]"]
+    subgraph MicrolifeSimulator["MicroLife Evolution Simulator<br>[External]"]
+        subgraph SimulationCore["Microlife Simulation Core<br>/src"]
+            Main["main.py<br>/src/main.py"]
+            Simulation["simulation.py<br>/src/simulation.py"]
+            Cell["cell.py<br>/src/cell.py"]
+            Clan["clan.py<br>/src/clan.py"]
+            Environment["environment.py<br>/src/environment.py"]
+            Food["food.py<br>/src/food.py"]
+            Constants["constants.py<br>/src/constants.py"]
+            Utils["utils.py<br>/src/utils.py"]
             %% Edges at this level (grouped by source)
-            main_loop["Main Loop<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/main.py"] -->|"Renders state from"| renderer["Renderer<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/main.py"]
+            Main["main.py<br>/src/main.py"] -->|"Initializes and runs"| Simulation["simulation.py<br>/src/simulation.py"]
+            Simulation["simulation.py<br>/src/simulation.py"] -->|"Manages"| Cell["cell.py<br>/src/cell.py"]
+            Simulation["simulation.py<br>/src/simulation.py"] -->|"Manages"| Clan["clan.py<br>/src/clan.py"]
+            Simulation["simulation.py<br>/src/simulation.py"] -->|"Manages"| Environment["environment.py<br>/src/environment.py"]
+            Simulation["simulation.py<br>/src/simulation.py"] -->|"Manages"| Food["food.py<br>/src/food.py"]
+            Simulation["simulation.py<br>/src/simulation.py"] -->|"Uses"| Constants["constants.py<br>/src/constants.py"]
+            Simulation["simulation.py<br>/src/simulation.py"] -->|"Uses"| Utils["utils.py<br>/src/utils.py"]
         end
-        subgraph simulation_core_boundary["Simulation Core<br>[External]"]
-            simulation_manager["Simulation Manager<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/simulation.py"]
-            update_engine["Update Engine<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/simulation.py"]
-            %% Edges at this level (grouped by source)
-            simulation_manager["Simulation Manager<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/simulation.py"] -->|"Uses to update entities"| update_engine["Update Engine<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/simulation.py"]
+        subgraph MutationData["Mutation Data<br>/data"]
+            MutationDataFile["mutation\_data.json<br>/data/mutation_data.json"]
         end
-        subgraph cell_management_boundary["Cell Management<br>[External]"]
-            cell_entity["Cell Entity<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/cell.py"]
-            cell_behavior_logic["Cell Behavior Logic<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/cell.py"]
+        subgraph SimulationLogs["Simulation Logs<br>/logs"]
+            LogFiles["Log Files<br>/logs"]
         end
-        subgraph clan_management_boundary["Clan Management<br>[External]"]
-            clan_entity["Clan Entity<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/clan.py"]
-            clan_behavior_logic["Clan Behavior Logic<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/clan.py"]
-        end
-        subgraph environment_management_boundary["Environment Management<br>[External]"]
-            environment_grid["Environment Grid<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/environment.py"]
-            resource_spawner["Resource Spawner<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/environment.py"]
-            %% Edges at this level (grouped by source)
-            environment_grid["Environment Grid<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/environment.py"] -->|"Provides resources to"| resource_spawner["Resource Spawner<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/environment.py"]
-        end
-        subgraph food_management_boundary["Food Management<br>[External]"]
-            food_entity["Food Entity<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/food.py"]
-            food_lifecycle_manager["Food Lifecycle Manager<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/food.py"]
-            %% Edges at this level (grouped by source)
-            food_lifecycle_manager["Food Lifecycle Manager<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/food.py"] -->|"Manages"| food_entity["Food Entity<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/food.py"]
+        subgraph SimulationAssets["Simulation Assets<br>/assets"]
+            AssetFiles["Image Files<br>/assets"]
         end
         %% Edges at this level (grouped by source)
-        main_loop["Main Loop<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/main.py"] -->|"Controls"| simulation_manager["Simulation Manager<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/simulation.py"]
-        update_engine["Update Engine<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/simulation.py"] -->|"Updates"| cell_entity["Cell Entity<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/cell.py"]
-        update_engine["Update Engine<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/simulation.py"] -->|"Updates"| clan_entity["Clan Entity<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/clan.py"]
-        update_engine["Update Engine<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/simulation.py"] -->|"Updates"| environment_grid["Environment Grid<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/environment.py"]
-        update_engine["Update Engine<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/simulation.py"] -->|"Updates"| food_entity["Food Entity<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/food.py"]
-        cell_behavior_logic["Cell Behavior Logic<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/cell.py"] -->|"Interacts with"| environment_grid["Environment Grid<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/environment.py"]
-        cell_behavior_logic["Cell Behavior Logic<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/cell.py"] -->|"Consumes"| food_entity["Food Entity<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/food.py"]
-        cell_behavior_logic["Cell Behavior Logic<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/cell.py"] -->|"Belongs to/Interacts with"| clan_entity["Clan Entity<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/clan.py"]
-        clan_behavior_logic["Clan Behavior Logic<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/clan.py"] -->|"Manages"| cell_entity["Cell Entity<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/cell.py"]
-        food_lifecycle_manager["Food Lifecycle Manager<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/food.py"] -->|"Obtains resources from"| resource_spawner["Resource Spawner<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/environment.py"]
+        Simulation["simulation.py<br>/src/simulation.py"] -->|"Reads and writes | JSON"| MutationDataFile["mutation\_data.json<br>/data/mutation_data.json"]
+        Simulation["simulation.py<br>/src/simulation.py"] -->|"Writes | Text"| LogFiles["Log Files<br>/logs"]
+        Simulation["simulation.py<br>/src/simulation.py"] -->|"Reads | Image Files"| AssetFiles["Image Files<br>/assets"]
     end
     %% Edges at this level (grouped by source)
-    user["User<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/main.py"] -->|"Starts and interacts with"| main_loop["Main Loop<br>/d:/BACKUP/FRED/PROJECTS/_ACTIVE/__GITHUB-TheRealFredP3D/Microlife-Simulation/Microlife-Simulation/src/main.py"]
+    User["Simulator User<br>/README.md"] -->|"Operates and observes using | Keyboard and Mouse"| Main["main.py<br>/src/main.py"]
+    Main["main.py<br>/src/main.py"] -->|"Uses for graphics, input, and game loop | Python Library"| Pygame["Pygame Library<br>/requirements.txt"]
+    Main["main.py<br>/src/main.py"] -->|"Runs on | Runtime Environment"| Python["Python 3.x Runtime<br>/requirements.txt"]
+    Main["main.py<br>/src/main.py"] -->|"Runs within | Operating System"| OperatingSystem["Operating System<br>[External]"]
 
 ```
 ---
-*Generated by [CodeViz.ai](https://codeviz.ai) on 10/11/2025, 10:36:04 PM*
+*Generated by [CodeViz.ai](https://codeviz.ai) on 10/13/2025, 6:26:46 PM*

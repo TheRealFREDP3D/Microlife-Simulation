@@ -1,282 +1,356 @@
-Here’s your document reformatted cleanly into Markdown with hierarchy, code references, and structure preserved:
+Perfect — here’s the **full Markdown document** with a clickable Table of Contents and a **Mermaid diagram** at the top to visualize the simulation flows.
 
-````markdown
-# MicroLife Evolution Simulator - Core Mechanics
-
-Complete evolutionary simulation system tracing from startup through organism life cycles, genetic mutation, environmental pressures, and food dynamics.  
-Key locations include:
-
-- Simulation initialization [1a]  
-- Cell behavior orchestrator [2d]  
-- Mutation mechanics [3c]  
-- Environmental effects [4c]  
-- Food ecosystem [5c]  
+You can drop this straight into a `.md` file, and both GitHub and Obsidian will render it properly (Mermaid diagrams work natively in both now).
 
 ---
 
-## 1. Simulation Startup & Initialization
-Main entry point and world setup process. See guide.
+````markdown
+# MicroLife Simulation Ecosystem Interactions
 
-### Simulation Initialization Flow
-- **File:** `main.py` (entry point)
+Traces the core flows of cellular life simulation including initialization, update cycles, food-seeking, reproduction, and environmental interactions.  
+
+**Key flows:**  
+- Simulation bootstrap [1c]  
+- Cell food pursuit [3d]  
+- Clan-based reproduction [4e]  
+- Environmental zone effects [5b]  
+
+---
+
+## Table of Contents
+- [Mermaid Flow Diagram](#mermaid-flow-diagram)
+- [1. Simulation Bootstrap and Ecosystem Initialization](#1-simulation-bootstrap-and-ecosystem-initialization)
+  - [1a. Create Simulation Instance](#1a-create-simulation-instance)
+  - [1b. Initialize Environment](#1b-initialize-environment)
+  - [1c. Create Initial Clans](#1c-create-initial-clans)
+  - [1d. Spawn Initial Cells](#1d-spawn-initial-cells)
+  - [1e. Spawn Initial Food](#1e-spawn-initial-food)
+- [2. Main Simulation Update Cycle](#2-main-simulation-update-cycle)
+  - [2a. Environment Update Call](#2a-environment-update-call)
+  - [2b. Update Each Cell](#2b-update-each-cell)
+  - [2c. Handle Reproduction](#2c-handle-reproduction)
+  - [2d. Update Food Items](#2d-update-food-items)
+  - [2e. Dynamic Food Spawning](#2e-dynamic-food-spawning)
+- [3. Cell Food-Seeking and Consumption Behavior](#3-cell-food-seeking-and-consumption-behavior)
+  - [3a. Find Nearby Food](#3a-find-nearby-food)
+  - [3b. Detect Food in Range](#3b-detect-food-in-range)
+  - [3c. Move Towards Target](#3c-move-towards-target)
+  - [3d. Execute Movement](#3d-execute-movement)
+  - [3e. Attempt to Eat](#3e-attempt-to-eat)
+  - [3f. Gain Energy](#3f-gain-energy)
+- [4. Cell Reproduction and Clan Mutation](#4-cell-reproduction-and-clan-mutation)
+  - [4a. Check Reproduction Conditions](#4a-check-reproduction-conditions)
+  - [4b. Split Energy](#4b-split-energy)
+  - [4c. Check for Mutation](#4c-check-for-mutation)
+  - [4d. Apply Clan Mutations](#4d-apply-clan-mutations)
+  - [4e. Create Offspring](#4e-create-offspring)
+- [5. Environmental Zone Effects on Ecosystem](#5-environmental-zone-effects-on-ecosystem)
+  - [5a. Detect Zone Overlap](#5a-detect-zone-overlap)
+  - [5b. Apply Toxic Damage](#5b-apply-toxic-damage)
+  - [5c. Check Resource Zone Usage](#5c-check-resource-zone-usage)
+  - [5d. Apply Food Boost](#5d-apply-food-boost)
+  - [5e. Regenerate Zones](#5e-regenerate-zones)
+
+---
+
+## Mermaid Flow Diagram
+
+```mermaid
+flowchart TD
+    A[Simulation Bootstrap] --> B[Main Update Cycle]
+    B --> C[Food-Seeking Behavior]
+    C --> D[Reproduction & Mutation]
+    D --> E[Environmental Zone Effects]
+    E --> B
+````
+
+---
+
+## 1. Simulation Bootstrap and Ecosystem Initialization
+
+How the simulation starts up and creates the initial population of cells, food, and environmental zones.
+
+### Simulation Bootstrap Process
+
+* **main() entry point**
 
 #### 1a. Create Simulation Instance
-- **Location:** `main.py:7`
+
+* **File:** `main.py:7`
+
 ```python
 sim = Simulation()
-__init__() constructor
-````
+```
+
+* Calls `__init__()` constructor
 
 #### 1b. Initialize Environment
 
-* **Location:** `simulation.py:12`
+* **File:** `simulation.py:12`
 
 ```python
 self.environment = Environment()
-__init__() constructor
-initialize_clans()
 ```
+
+* Calls `__init__()` constructor
 
 #### 1c. Create Initial Clans
 
-* **Location:** `environment.py:47`
+* **File:** `environment.py:43`
 
 ```python
+self.initialize_clans()
 for i in range(INITIAL_CLAN_COUNT):
-    Clan()  # instantiation
-initialize_population()
+    self.clans.append(Clan(...))
+self.initialize_population()
 ```
+
+* Spawns cells for each clan
 
 #### 1d. Spawn Initial Cells
 
-* **Location:** `environment.py:57`
+* **File:** `environment.py:63`
 
 ```python
 self.cells.append(Cell(x, y, clan))
-initialize_zones()
 ```
 
-#### 1e. Main Game Loop
+#### 1e. Spawn Initial Food
 
-* **Location:** `simulation.py:147`
+* **File:** `environment.py:67`
 
 ```python
-while running:
-    pygame.event handling
-    environment.update() loop
+self.food.append(spawn_food_item())
 ```
 
-* **Setup:** `pygame.init()`
+* `sim.run()` starts main loop
+* `pygame.init()` setup
 
 ---
 
-## 2. Cell Behavior & Life Cycle
+## 2. Main Simulation Update Cycle
 
-Individual cell actions and survival mechanics. See guide.
+The core loop that drives all organism behaviors and ecosystem changes each frame.
 
-### Cell Life Cycle Execution
+### Simulation Update Cycle
 
-* **Loop:** `Environment.update()`
+#### 2a. Environment Update Call
 
-#### 2a. Food Detection
-
-* **Location:** `cell.py:78`
+* **File:** `simulation.py:196`
 
 ```python
-def find_food(self, food_items):
-    distance check & target set
+self.environment.update()
 ```
 
-#### 2b. Movement Logic
+* Updates all cells
+* Applies toxic zone damage
 
-* **Location:** `cell.py:42`
+#### 2b. Update Each Cell
+
+* **File:** `environment.py:97`
 
 ```python
-def move(self):
-    target pursuit or random walk
-    energy consumption calculation
+if cell.update(self.food):
 ```
 
-#### 2c. Energy Consumption
+* Cell finds food & moves
 
-* **Location:** `cell.py:89`
+#### 2c. Handle Reproduction
+
+* **File:** `environment.py:100`
 
 ```python
-def eat(self, food_items):
-    food removal on contact
+offspring = cell.reproduce()
 ```
 
-#### 2d. Cell Update Cycle
+#### 2d. Update Food Items
 
-* **Location:** `cell.py:142`
+* **File:** `environment.py:108`
 
 ```python
-def update(self, food_items):
-    age increment & trait sync
+if food_item.update():
+    # remove expired
 ```
 
-#### 2e. Death Conditions
+#### 2e. Dynamic Food Spawning
 
-* **Location:** `cell.py:156`
+* **File:** `environment.py:123`
 
 ```python
-if self.energy <= 0 or self.age >= self.lifespan:
-    # Cell dies
+self.food.append(spawn_food_item())
 ```
 
-* **Note:** `Environment` filters dead cells
+* Periodic zone regeneration
 
 ---
 
-## 3. Evolution & Reproduction System
+## 3. Cell Food-Seeking and Consumption Behavior
 
-Genetic inheritance and mutation mechanics. See guide.
+How cells detect, pursue, and consume food resources.
 
-### Evolution & Reproduction Flow
+### Cell Food-Seeking Behavior
 
-* **Trigger:** `Cell.update()` calls `reproduce()`
+#### 3a. Find Nearby Food
 
-#### 3a. Reproduction Trigger
-
-* **Location:** `cell.py:98`
+* **File:** `cell.py:186`
 
 ```python
-def reproduce(self, mate=None):
-    # Energy threshold + Age check
+self.find_food(food_items)
 ```
 
-#### 3b. Energy Splitting
+#### 3b. Detect Food in Range
 
-* **Location:** `cell.py:108`
+* **File:** `cell.py:101`
+
+```python
+if dist < self.sense_radius and dist < min_dist:
+    self.target_food = food
+```
+
+#### 3c. Move Towards Target
+
+* **File:** `cell.py:187`
+
+```python
+self.move()
+```
+
+#### 3d. Execute Movement
+
+* **File:** `cell.py:73`
+
+```python
+self.x += direction_x * move_amount
+```
+
+* Applies energy cost
+
+#### 3e. Attempt to Eat
+
+* **File:** `cell.py:188`
+
+```python
+self.eat(food_items)
+```
+
+#### 3f. Gain Energy
+
+* **File:** `cell.py:108`
+
+```python
+self.energy += self.target_food.energy_value
+```
+
+* Removes food from environment
+
+---
+
+## 4. Cell Reproduction and Clan Mutation
+
+Cells divide and pass on mutated clan traits.
+
+### Cell Reproduction Process
+
+#### 4a. Check Reproduction Conditions
+
+* **File:** `cell.py:126`
+
+```python
+if self.energy >= CELL_REPRODUCTION_THRESHOLD and self.age >= CELL_MIN_AGE_TO_REPRODUCE:
+```
+
+#### 4b. Split Energy
+
+* **File:** `cell.py:127`
 
 ```python
 self.energy /= 2
-# Calculate offspring position
 ```
 
-#### 3c. Mutation Check
+#### 4c. Check for Mutation
 
-* **Location:** `cell.py:114`
+* **File:** `cell.py:134`
 
 ```python
 if random.random() < CELL_MUTATION_RATE:
-    # Mutate traits (speed, sense radius, energy efficiency, size, lifespan)
 ```
 
-#### 3d. Trait Mutation
+#### 4d. Apply Clan Mutations
 
-* **Location:** `clan.py:41`
+* **File:** `cell.py:135`
 
 ```python
-def apply_mutation(self, trait_name, mutation_amount):
-    # Apply clan-level mutation
+self.clan.apply_mutation("speed", random.uniform(-CELL_MUTATION_AMOUNT, CELL_MUTATION_AMOUNT))
 ```
 
-#### 3e. Offspring Creation
+* Mutates: `sense_radius`, `energy_efficiency`, `size`, `lifespan`
 
-* **Location:** `cell.py:126`
+#### 4e. Create Offspring
+
+* **File:** `cell.py:146`
 
 ```python
 return Cell(offspring_x, offspring_y, self.clan, self.energy)
 ```
 
-* Clan-level trait inheritance
-* Traits stored in clan object
-* All cells reference clan traits
-
 ---
 
-## 4. Environmental Pressure System
+## 5. Environmental Zone Effects on Ecosystem
 
-Dynamic zones and their effects on organisms. See guide.
+How toxic and resource zones impact survival and food availability.
 
-### Environmental System
+### Environmental Zone System
 
-* **Init:** `Environment.__init__()`
+#### 5a. Detect Zone Overlap
 
-#### 4a. Zone Generation
-
-* **Location:** `environment.py:69`
+* **File:** `environment.py:94`
 
 ```python
-def initialize_zones(self):
-    Create toxic zones
-    Create resource zones
+if get_distance((cell.x, cell.y), (zone.x, zone.y)) < zone.radius:
 ```
 
-#### 4b. Zone Dynamics
+#### 5b. Apply Toxic Damage
 
-* **Location:** `environment.py:85`
-
-```python
-if self.environment_timer >= ENVIRONMENT_CHANGE_INTERVAL:
-    Reinitialize zones
-```
-
-#### 4c. Toxic Damage
-
-* **Location:** `environment.py:94`
+* **File:** `environment.py:95`
 
 ```python
 cell.energy -= TOXIC_ZONE_DAMAGE_PER_FRAME
-# Check if cell is inside toxic zone
 ```
 
-#### 4d. Resource Boost
+#### 5c. Check Resource Zone Usage
 
-* **Location:** `environment.py:119`
+* **File:** `environment.py:118`
+
+```python
+if any(get_distance((cell.x, cell.y), (zone.x, zone.y)) < zone.radius for cell in self.cells):
+```
+
+#### 5d. Apply Food Boost
+
+* **File:** `environment.py:119`
 
 ```python
 food_spawn_multiplier = RESOURCE_ZONE_FOOD_BOOST
-# Boost for cells in resource zones
+```
+
+#### 5e. Regenerate Zones
+
+* **File:** `environment.py:86`
+
+```python
+self.initialize_zones()
+```
+
+* Creates toxic zones
+* Creates resource zones
+
+---
+
 ```
 
 ---
 
-## 5. Food Ecosystem Dynamics
+✅ That’s the complete `.md` file with a **TOC** and **Mermaid flowchart** at the top.  
 
-Food spawning, decay, and consumption mechanics. See guide.
-
-### Food Ecosystem Dynamics
-
-* **Loop:** `Environment.update()` (main loop)
-* Updates existing food items
-
-#### 5a. Food Creation
-
-* **Location:** `food.py:38`
-
-```python
-def spawn_food_item(x=None, y=None):
-    # Called by environment or user (right click)
+Do you want me to also generate **separate Mermaid diagrams for each section** (like food-seeking, reproduction, environment) so it’s not just one high-level flow but also visual per-process?
 ```
-
-#### 5b. Food Decay
-
-* **Location:** `food.py:32`
-
-```python
-def update(self):
-    # Handles natural food decay
-```
-
-#### 5c. Dynamic Spawning
-
-* **Location:** `environment.py:122`
-
-```python
-if len(self.food) < FOOD_MAX_COUNT and random.random() < FOOD_SPAWN_RATE_PER_FRAME * food_spawn_multiplier:
-    # Spawn new food
-```
-
-#### 5d. Food Consumption
-
-* **Location:** `cell.py:93`
-
-```python
-food_items.remove(self.target_food)
-```
-
-* Triggered in `cell.update()` via `cell.eat()`
-
----

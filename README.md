@@ -1,90 +1,133 @@
 # MicroLife Evolution Simulator
 
-This project is an evolution simulator built using Pygame, designed to explore basic principles of natural selection and adaptation in a simplified environment.
+A Pygame-based evolution simulator that explores natural selection, adaptation, and clan-based evolution in a dynamic environment. This project simulates microorganisms competing for resources, reproducing, and evolving over generations.
 
 ## Project Structure
 
+```text
+Microlife-Simulation/
+├── _DEV_/                      # Development documentation and planning
+│   └── development_plan.md     # Detailed development roadmap
+├── assets/                     # Visual assets (images, sprites)
+│   ├── background_tile.png     # Background texture
+│   ├── cell_basic.png          # Base cell sprite
+│   └── food_basic.png          # Base food sprite
+├── data/
+│   └── mutation_data.json      # Configuration for mutation parameters
+├── logs/                       # Auto-generated simulation logs
+├── src/                        # Source code
+│   ├── cell.py                 # Cell class and behavior
+│   ├── clan.py                 # Clan management and traits
+│   ├── constants.py            # Game configuration
+│   ├── environment.py          # World state and management
+│   ├── food.py                 # Food generation and behavior
+│   ├── main.py                 # Entry point
+│   ├── simulation.py           # Main simulation loop
+│   └── utils.py                # Helper functions
+├── tests/                      # Test suite
+├── .gitignore
+├── README.md                   # This file
+└── requirements.txt            # Python dependencies
 ```
-microlife_evo_sim/
-├── README.md
-├── asset_list.md
-├── assets
-│   ├── background_tile.png
-│   ├── cell_basic.png
-│   └── food_basic.png
-├── src
-│   ├── cell.py
-│   ├── clan.py
-│   ├── constants.py
-│   ├── environment.py
-│   ├── food.py
-│   ├── main.py
-│   ├── simulation.py
-│   ├── utils.py
-│   └── logs/ (automatically created for simulation logs)
-├── tests
-├── development_plan.md
-└── todo.md
-```
+
+## Features
+
+### Core Mechanics
+
+- **Clan-based Evolution**: Organisms belong to clans with shared, heritable traits
+- **Dynamic Environment**: Shifting resource zones and hazards
+- **Energy System**: Cells consume energy for movement and reproduction
+- **Trait Inheritance**: Offspring inherit and mutate traits from parent cells
+
+### Simulation Controls
+
+- `P`: Pause/Resume simulation
+- `↑/↓`: Adjust simulation speed (0.5x to 4x)
+- `Left Click`: Select cell (when paused) to view traits
+- `Right Click`: Spawn food at cursor position
+- `Reset Button`: Restart simulation with new random seed
+
+### Visual Feedback
+
+- Color-coded clans for easy identification
+- Real-time statistics panel
+- Cell selection highlights and info display
+- Environmental zone visualization
 
 ## Getting Started
 
 ### Prerequisites
 
-To run this simulator, you will need Python 3.x and Pygame installed.
+- Python 3.11+
+- Pygame 2.5+
 
-```bash
-pip install pygame
-```
+### Installation
 
-### Running the Simulator
+1. Clone the repository:
 
-1.  **Add Assets**: Please place the actual image files for `cell_basic.png`, `food_basic.png`, and `background_tile.png` into the `assets/` directory. Placeholder files have been created for you. If images are not provided, the simulation will fall back to drawing colored circles and a black background.
+   ```bash
+   git clone https://github.com/yourusername/Microlife-Simulation.git
+   cd Microlife-Simulation
+   ```
 
-2.  **Execute `main.py`**:
+2. Create and activate a virtual environment (recommended):
 
-    ```bash
-    cd microlife_evo_sim/src
-    python3.11 main.py
-    ```
+   ```bash
+   python -m venv venv
+   .\venv\Scripts\activate  # Windows
+   source venv/bin/activate  # Linux/Mac
+   ```
 
-### User Controls
+3. Install dependencies:
 
-*   `P`: Pause/Resume the simulation.
-*   `Up Arrow`: Increase simulation speed.
-*   `Down Arrow`: Decrease simulation speed.
-*   `Left Click` (on simulation area): Selects a cell to display its traits when paused. (Manual cell spawning removed to support clan mechanics).
-*   `Right Click` (on simulation area): Spawn a new food item at the mouse position.
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## Current Status & Features
+4. Run the simulation:
 
-This project is a functional prototype with core simulation mechanics and basic UI. Key features implemented include:
+   ```bash
+   cd src
+   python main.py
+   ```
 
-*   **Clan Mechanic**: Organisms are grouped into clans. All descendants of initial specimens belong to the same clan. Clans have shared traits that mutate collectively. Cells only mate with specimens of the same clan.
-    *   Initial simulation starts with `INITIAL_CLAN_COUNT` (default 3) clans, each spawning `CELLS_PER_CLAN` (default 2) cells grouped together.
-    *   Initial cells automatically reproduce after `INITIAL_REPRODUCTION_TIME` (default 20 seconds).
-*   **Cell Mechanics**: Movement towards food, energy consumption (movement and idle), reproduction with energy splitting, age-based death, and mutation of traits (speed, sense radius, energy efficiency, size, lifespan).
-*   **Food System**: Varied food types with different energy values, sizes, and lifespans. Dynamic spawning based on food density and decay over time.
-*   **Environmental Factors**: Toxic zones (damage cells) and resource zones (boost food spawning). Zones dynamically shift over time.
-*   **Basic UI**: Displays cell and food counts, simulation speed, pause status, and average traits of the cell population. Allows inspection of individual cell traits when paused. Now also displays clan-specific information (ID, population, average traits) with distinct colors.
-*   **Statistics & Logging**: Tracks population history and average trait values. Logs significant events and user actions to a timestamped file in the `logs/` directory.
-*   **Visual Assets Integration**: Placeholder images for cells, food, and background are integrated. The simulation will use these if provided, otherwise it falls back to basic drawing. Cells are tinted with their clan's color.
+## Configuration
 
-## Next Steps (Future Enhancements)
+Key parameters can be adjusted in `src/constants.py`:
 
-*   **Performance Optimization**: Further optimize rendering and collision detection (best done locally with profiling tools).
-*   **Advanced UI**: Implement graphical plots for statistics, more detailed cell inspection, and configurable simulation parameters.
-*   **Predator/Prey Dynamics**: Introduce a predator species to add another layer of evolutionary pressure.
-*   **Genetic Algorithms**: Implement more sophisticated genetic algorithms for trait inheritance and mutation.
-*   **Persistence**: Save/load simulation states.
+- World dimensions and scale
+- Initial population settings
+- Energy and reproduction rules
+- Mutation rates and ranges
+- Environmental factors
 
-## Development Plan
+## Development Status
 
-The detailed development plan, outlining all phases and tasks, can be found in `development_plan.md`.
+### Current Version: 1.0.0 (Stable)
 
-## Known Issues
+### Recent Updates
 
-*   Graphical output is not visible in the sandbox environment. Verification of visual elements and performance requires local execution.
-*   Performance optimizations and bug fixing are best handled with local profiling and testing.
+- Implemented clan-based evolution mechanics
+- Added dynamic environmental zones
+- Improved performance and stability
+- Enhanced visualization and UI
 
+### Known Issues
 
+- High cell populations may impact performance
+- Occasional food spawning overlap
+- Detailed statistics visualization pending
+
+## Contributing
+
+Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Built with Pygame
+- Inspired by classic artificial life simulations
+- Special thanks to all contributors

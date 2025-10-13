@@ -21,13 +21,22 @@ from constants import (
 )
 from utils import clamp, get_distance
 
-# Load cell image once
+# Load cell image once (32x32 sprite)
 CELL_IMAGE_PATH = os.path.join("assets", "cell_basic.png")
 try:
     ORIGINAL_CELL_IMAGE = pygame.image.load(CELL_IMAGE_PATH).convert_alpha()
+    print(f"Loaded cell sprite: {ORIGINAL_CELL_IMAGE.get_size()}")
 except pygame.error:
     print(f"Warning: Could not load cell image at {CELL_IMAGE_PATH}. Falling back to drawing circles.")
     ORIGINAL_CELL_IMAGE = None
+
+# Cache for scaled cell images by size to improve performance
+_cell_image_cache = {}
+
+def clear_cell_image_cache():
+    """Clear the cell image cache to free memory if needed."""
+    global _cell_image_cache
+    _cell_image_cache.clear()
 
 class Cell:
     def __init__(self, x, y, clan: Clan, energy=CELL_ENERGY_MAX):
@@ -139,13 +148,28 @@ class Cell:
 
     def draw(self, screen):
         if ORIGINAL_CELL_IMAGE:
-            scaled_image = pygame.transform.scale(ORIGINAL_CELL_IMAGE, (int(self.size * 2), int(self.size * 2))) # Scale to cell size
-            # Apply clan color as a tint (simple method, can be improved)
-            colored_image = scaled_image.copy()
-            colored_image.fill(self.clan.color + (0,), None, pygame.BLEND_RGBA_MULT) # Tint with clan color
+            # Create cache key based on size and clan color
+            cache_key = (int(self.size), self.clan.id)
+            
+            # Check if we have a cached version of this sprite
+            if cache_key not in _cell_image_cache:
+                # Scale the 32x32 sprite to match cell size (multiply by 2 for diameter)
+                target_size = max(int(self.size * 2), 8)  # Minimum 8 pixels
+                scaled_image = pygame.transform.smoothscale(ORIGINAL_CELL_IMAGE, (target_size, target_size))
+                
+                # Apply clan color tint
+                colored_image = scaled_image.copy()
+                colored_image.fill(self.clan.color + (0,), None, pygame.BLEND_RGBA_MULT)
+                
+                # Cache the result
+                _cell_image_cache[cache_key] = colored_image
+            
+            # Use cached image
+            colored_image = _cell_image_cache[cache_key]
             image_rect = colored_image.get_rect(center=(int(self.x), int(self.y)))
             screen.blit(colored_image, image_rect)
         else:
+            # Fallback to circles if sprite not loaded
             pygame.draw.circle(screen, self.clan.color, (int(self.x), int(self.y)), int(self.size))
         # Optionally draw sense radius for debugging
         # pygame.draw.circle(screen, (50, 50, 50), (int(self.x), int(self.y)), int(self.sense_radius), 1)

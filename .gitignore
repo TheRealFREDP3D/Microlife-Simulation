@@ -217,3 +217,8 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 asset_list.md
+/.codeviz
+/.qodo
+/.venv
+/assets/cell_basic.png~
+/assets/food_basic.png~

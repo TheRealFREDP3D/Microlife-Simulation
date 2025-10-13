@@ -160,3 +160,25 @@
 - [ ] Create final `.zip` archive: Package the updated project into a new distributable archive.
 - [ ] Verify archive integrity: Ensure the `.zip` file is not corrupted and contains all necessary files.
 - [ ] Deliver final package: Provide the user with the updated `.zip` archive and a summary of the new features.
+
+### Phase 19: Post-Review Follow-Up
+
+- [ ] Repository hygiene improvements
+  - [ ] Remove committed `logs/*.txt` files from version control history and working tree.
+  - [ ] Expand `.gitignore` to exclude simulation logs and document how to enable persistent logging.
+- [ ] Testing foundation
+  - [ ] Add unit tests covering `Cell.reproduce`, `Clan.apply_mutation`, and `Environment.update` reproduction/culled paths.
+  - [ ] Introduce regression test ensuring no duplicate food spawns at identical coordinates.
+- [ ] Food spawning hardening
+  - [ ] Guard `spawn_food_item` against placing food on occupied coordinates.
+  - [ ] Localize resource zone spawn boosts so the multiplier only affects food generated inside the zone.
+- [ ] Reproduction cadence clarification
+  - [ ] Decide on desired post-threshold reproduction cooldown behaviour.
+  - [ ] Implement chosen cooldown/reset logic and update related comments/tests.
+  - [ ] Document reproduction rules and cooldown in `README.md` and `constants.py`.
+- [ ] Code cleanup and performance groundwork
+  - [ ] Remove unused constants and imports (e.g., `INITIAL_CELL_COUNT`, stray module imports, unused `random` in `utils.py`).
+  - [ ] Cache scaled sprite surfaces per clan size to reduce per-frame `pygame.transform.scale` calls.
+- [ ] Documentation alignment
+  - [ ] Reconcile `_DEV_/NEXT_STEPS.md` with `development_plan.md`, clarifying ownership of roadmap items.
+  - [ ] Note current logging behaviour and reproduction cadence decisions in README Known Issues.
